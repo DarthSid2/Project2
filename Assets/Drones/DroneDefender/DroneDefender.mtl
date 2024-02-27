@@ -1,0 +1,25 @@
+<<<<<<< HEAD
+# Exported from Wings 3D 2.1.5
+newmtl octotoad1_auv
+Ns 90.0
+d 1.0
+illum 2
+Kd 1.0 1.0 1.0
+Ka 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+map_Kd octotoad1_auv.png
+
+=======
+# Exported from Wings 3D 2.1.5
+newmtl octotoad1_auv
+Ns 90.0
+d 1.0
+illum 2
+Kd 1.0 1.0 1.0
+Ka 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+map_Kd octotoad1_auv.png
+
+>>>>>>> 08883a940b37e16a5ef4f6f8643a3ec6b01c2441
