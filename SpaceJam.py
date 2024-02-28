@@ -3,6 +3,10 @@ from panda3d.core import *
 import DroneDefencePath as DroneDefencePath
 import SpaceJamClass as spaceJamClass
 class SpaceJam(ShowBase):
+    
+    
+    
+    
     def __init__(self):
         ShowBase.__init__(self)
        
@@ -10,49 +14,42 @@ class SpaceJam(ShowBase):
         unitVec = DroneDefencePath.Cloud()
         unitVec.normalize()
         position = unitVec * 500 + centralObject.modelNode.getPos()  
-        spaceJamClass.Drone(self.loader, "./Assets/Drones/DroneDefender.x", self.render, droneName, "./Assets/Drones/Drones.jpg", position, 10)
+        spaceJamClass.Drone(self.loader, "./Assets/Drones/DroneDefender.obj", self.render, droneName, "./Assets/Drones/DroneDefender/octotoad1_auv.png", position, 10)
     
     
     def DrawBaseballSeams(self, centralObject, droneName, step, numSeams, radius = 1): 
         unitVec = DroneDefencePath.BaseballSeams(step, numSeams, B = 0.4)
         unitVec.normalize()
         position = unitVec * radius * 500 + centralObject.modelNode.getPos()  
-        spaceJamClass.Drone(self.loader, "./Assets/Drones/DroneDefender/DroneDefender.x", self.render, droneName, "./Assets/Drones/DroneDefender/Drones.jpg", position, 5)
+        spaceJamClass.Drone(self.loader, "./Assets/Drones/DroneDefender/DroneDefender.obj", self.render, droneName, "./Assets/Drones/DroneDefender/octotoad1_auv.png", position, 5)
     
     
     def DrawAxisDronesXY (self, centralObject, droneName):
         unitVec = DroneDefencePath.axisDronesXY ()
         unitVec.normalize()
         position = unitVec * 550 + centralObject.modelNode.getPos()  
-        spaceJamClass.Drone(self.loader, "./Assets/Drones/DroneDefender/DroneDefender.x", self.render, droneName, "./Assets/Drones/DroneDefender/Drones.jpg", position, 5)
+        spaceJamClass.Drone(self.loader, "./Assets/Drones/DroneDefender/DroneDefender.obj", self.render, droneName, "./Assets/Drones/DroneDefender/octotoad1_auv.png", position, 5)
     
     
     def DrawAxisDronesXZ (self, centralObject, droneName):
         unitVec = DroneDefencePath.axisDronesXZ ()
         unitVec.normalize()
         position = unitVec * 600 + centralObject.modelNode.getPos()  
-        spaceJamClass.Drone(self.loader, "./Assets/Drones/DroneDefender/DroneDefender.x", self.render, droneName, "./Assets/Drones/DroneDefender/Drones.jpg", position, 5)
-    
-    
+        spaceJamClass.Drone(self.loader, "./Assets/Drones/DroneDefender/DroneDefender.obj", self.render, droneName, "./Assets/Drones/DroneDefender/octotoad1_auv.png", position, 5)
     
     
     def DrawAxisDronesYZ (self, centralObject, droneName):
         unitVec = DroneDefencePath.axisDronesYZ ()
         unitVec.normalize()
         position = unitVec * 650 + centralObject.modelNode.getPos()  
-        spaceJamClass.Drone(self.loader, "./Assets/Drones/DroneDefender/DroneDefender.x", self.render, droneName, "./Assets/Drones/DroneDefender/Drones.jpg", position, 5)
+        spaceJamClass.Drone(self.loader, "./Assets/Drones/DroneDefender/DroneDefender.obj", self.render, droneName, "./Assets/Drones/DroneDefender/octotoad1_auv.png", position, 5)
     
-        fullCycle = 60
-
-        for j in range(fullCycle):
-            spaceJamClass.Drone.droneCount += 1
-            nickName = "Drone" + str(spaceJamClass.Drone.droneCount)
-            self.DrawCloudDefense(self.Planet1, nickName)
-            self.DrawBaseBallSeams(self.Planet2, nickName, j , fullCycle)
-            self.DrawCircleXZ(self.Planet3, nickName)
-            self.DrawCircleXY(self.Planet4, nickName)
-            self.DrawCircleYZ(self.Planet5, nickName)
-
+     
+    def setCamera(self):
+        self.disableMouse()
+        self.camera.reparentTo(self.ship.modelNode)
+        self.camera.setFluidPos(0, 1, 0)
+        
 
     def SetupScene(self):
         self.Universe = self.loader.loadModel("./Assets/Universe/Universe.x")
@@ -105,21 +102,31 @@ class SpaceJam(ShowBase):
         self.Ship1 = self.loader.loadModel("./Assets/Spaceships/spaceship.x")
         self.Ship1.reparentTo(self.render)
         self.Ship1.setPos(100, 3280, 100)
-        self.Ship1.setScale(500)
+        self.Ship1.setScale(15)
         self.Ship1.setTexture(tex, 1)
 
         self.Station1 = self.loader.loadModel("./Assets/Space Station/SpaceStation1B/spaceStation.x.obj")
         self.Station1.reparentTo(self.render)
         self.Station1.setPos(110, 3300, 120)
-        self.Station1.setScale(500)
+        self.Station1.setScale(25)
         self.Station1.setTexture(tex, 1)
 
         self.tex = self.loader.loadTexture("./Assets/Universe/starfield-in-blue.jpg")
         self.Universe.setTexture(self.tex, 1)
 
+        fullCycle = 60
 
+        for j in range(fullCycle):
+            spaceJamClass.Drone.droneCount += 1
+            nickName = "Drone" + str(spaceJamClass.Drone.droneCount)
+            self.DrawCloudDefense(self.Planet1, nickName)
+            self.DrawBaseBallSeams(self.Planet2, nickName, j , fullCycle)
+            self.DrawCircleXZ(self.Planet3, nickName)
+            self.DrawCircleXY(self.Planet4, nickName)
+            self.DrawCircleYZ(self.Planet5, nickName)
 
 
 
 app = SpaceJam()
+app.sceneSetup()
 app.run()

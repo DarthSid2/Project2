@@ -1,6 +1,9 @@
 import math, random 
 from panda3d.core import *
+from panda3d.core import Vec3
 import SpaceJamClass as SpaceJamClass
+from math import sin, cos, tan
+
 
 def Cloud(radius = 1):
     x = 2 * random.random() - 1 
@@ -37,12 +40,16 @@ def axisDronesXY (radius = 1):
     unitVec = Vec3(50.0 * math.cos(theta), 50.0 * math.sin(theta), 0.0 * math.tan(theta))
     SpaceJamClass.increment.Increment += 1
     return unitVec * radius
+
+
 def axisDronesXZ (radius = 1):
     x = SpaceJamClass.increment.Increment
     theta = x
     unitVec = Vec3(50.0 * math.cos(theta), 0.0 * math.tan(theta), 50.0 * math.sin(theta))
     SpaceJamClass.increment.Increment += 1
     return unitVec * radius
+
+
 def axisDronesYZ (radius = 1):
     x = SpaceJamClass.increment.Increment
     theta = x
