@@ -128,6 +128,6 @@ class SpaceJam(ShowBase):
 
 
 app = SpaceJam()
-app.sceneSetup()
+app.SetupScene()
 app.ship.SetkeyBindings()
 app.run()
